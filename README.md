@@ -1,2 +1,3 @@
 # devlake-health-check
-Repository to handle health check and Github issue label management
+
+> Repository to handle health check and Github issue label management

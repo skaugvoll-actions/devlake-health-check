@@ -1,0 +1,41 @@
+name: "Are there any obvious things that need to change ?"
+
+author: S.Skaugvoll
+
+description: |
+  Checks http status code of url, and creates/closes github issue in given repo.
+  Adds labels so that DevLake can be used to ingest issues and calculate mean time to restore service (MTTR)
+
+inputs:
+  url:
+    required: true
+    description: "Url to service to check http status codes for"
+  repository:
+    required: true
+    description: "Github repo name/path. e.g 'skaugvoll-actions/devlake-health-check'"
+  serviceName:
+    required: true
+    description: "App or microservice name"
+  labels:
+    required: true
+    description: >
+      Comma separated string with labels to add to issues,
+      MUST create a unique combination
+      thus recommended to add serviceName in this list
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+        cache: "pip" # caching pip dependencies
+    - name: install deps
+      shell: bash
+      run: |
+        pip install -r requirements.txt
+    - name: Run healthcheck
+      shell: bash
+      run: |
+        python ./tracker/python/src/incident-handling.py ${inputs.url} ${inputs.repository} ${inputs.serviceName} ${inputs.labels}
