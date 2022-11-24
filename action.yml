@@ -38,4 +38,4 @@ runs:
     - name: Run healthcheck
       shell: bash
       run: |
-        python ./tracker/python/src/incident-handling.py ${{inputs.url}} ${{inputs.repository}} ${{inputs.serviceName}} ${{inputs.labels}}
+        python incident-handling.py ${{inputs.url}} ${{inputs.repository}} ${{inputs.serviceName}} ${{inputs.labels}}
