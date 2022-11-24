@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: skaugvoll-actions/devlake-health-check@v1.0.0-beta
+      - uses: skaugvoll-actions/devlake-health-check@v1.0.1-beta
         with:
           url: http://google.com # should always be up
           repository: su-sisk/devlake-test-repo
@@ -17,19 +17,19 @@ jobs:
           labels: saes,dora,incident,down
         env:
           gh_token: ${{ secrets.GH_PAT }}
-      # - uses: skaugvoll-actions/devlake-health-check@v1.0.0-beta
-      #   with:
-      #     url: http://googlee.com # should always return >400, and create issue
-      #     repository: su-sisk/devlake-test-repo
-      #     serviceName: saes
-      #     labels: saes,dora,incident,down
-      #   env:
-      #     gh_token: ${{ secrets.gh_pat }}
-      # - uses: skaugvoll-actions/devlake-health-check@v1.0.0-beta
-      #   with:
-      #     url: http://google.com # should always be up, since last seen down, close issue
-      #     repository: su-sisk/devlake-test-repo
-      #     serviceName: saes
-      #     labels: saes,dora,incident,down
-      #   env:
-      #     gh_token: ${{ secrets.gh_pat }}
+      - uses: skaugvoll-actions/devlake-health-check@v1.0.1-beta
+        with:
+          url: http://googlee.com # should return >400, create issue
+          repository: su-sisk/devlake-test-repo
+          serviceName: saes
+          labels: saes,dora,incident,down
+        env:
+          gh_token: ${{ secrets.GH_PAT }}
+      - uses: skaugvoll-actions/devlake-health-check@v1.0.1-beta
+        with:
+          url: http://google.com # should be good, so close issue
+          repository: su-sisk/devlake-test-repo
+          serviceName: saes
+          labels: saes,dora,incident,down
+        env:
+          gh_token: ${{ secrets.GH_PAT }}
