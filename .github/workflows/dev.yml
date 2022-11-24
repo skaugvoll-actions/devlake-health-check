@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: skaugvoll-actions/devlake-health-check@v1.0.0-beta
+      - uses: skaugvoll-actions/devlake-health-check@v1.0.1-beta
         with:
           url: http://google.com # should always be up
           repository: su-sisk/devlake-test-repo
